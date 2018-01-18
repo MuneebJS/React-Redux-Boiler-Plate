@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-
+import { API } from '../config/endpoint';
+import axios from 'axios';
+import '../index.css';
 
 
 const styles = {
@@ -36,66 +38,85 @@ const btnStyle = {
     fontWeight: "bold",
     letterSpacing: .5,
     fontSize: 15,
-    marginTop: 10
+    marginTop: 10,
+    float: "left !important",
+    textAlign: "left !important"
 }
 class ProductList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: null,
+            isErr: false,
+            err: null
+        }
+    }
+
+    componentDidMount() {
+        axios.get(`${API}/getProducts`).then(res => {
+            this.setState({ products: res.data })
+        }).catch(err => {
+            this.setState({ isErr: true })
+        })
+    }
+
     clickHandler() {
         this.props.history.push('/details')
     }
     render() {
         return (
-            <div style={{ textAlign: 'center' }} className="container">
-                <h1 style={{ textAlign: 'center' }}>Product List</h1>
+            <div style={{ textAlign: 'center' }} className="container wrap">
+                <h1 style={{ textAlign: 'center' }} className="page-header">Product List</h1>
                 <div className="row">
-                    <div style={styles} className="col-md-4">
+                    <div style={styles} className="col-md-4 product">
                         <h2>Product 1</h2>
                         <img src="https://picsum.photos/1000" alt="Product" style={imgStyles} />
                         <div >Lorem Ipsum is simply dummy text of the printing and typesetting industry...</div>
                         <button onClick={this.clickHandler.bind(this)} style={btnStyle}>Details</button>
                     </div>
-                    <div style={styles} className="col-md-4">
+                    <div style={styles} className="col-md-4 product">
                         <h2>Product 2</h2>
                         <img src="https://picsum.photos/400" alt="Product" style={imgStyles} />
                         <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</div>
                         <button onClick={this.clickHandler.bind(this)} style={btnStyle}>Details</button>
                     </div>
-                    <div style={styles} className="col-md-4">
+                    <div style={styles} className="col-md-4 product">
                         <h2>Product 3</h2>
                         <img src="https://picsum.photos/500" alt="Product" style={imgStyles} />
                         <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</div>
                         <button onClick={this.clickHandler.bind(this)} style={btnStyle}>Details</button>
                     </div>
-                    <div style={styles} className="col-md-4">
+                    <div style={styles} className="col-md-4 product">
                         <h2>Product 4</h2>
                         <img src="https://picsum.photos/600" alt="Product" style={imgStyles} />
                         <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</div>
                         <button onClick={this.clickHandler.bind(this)} style={btnStyle}>Details</button>
                     </div>
-                    <div style={styles} className="col-md-4">
+                    <div style={styles} className="col-md-4 product">
                         <h2>Product 5</h2>
                         <img src="https://picsum.photos/800" alt="Product" style={imgStyles} />
                         <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</div>
                         <button onClick={this.clickHandler.bind(this)} style={btnStyle}>Details</button>
                     </div>
-                    <div style={styles} className="col-md-4">
+                    <div style={styles} className="col-md-4 product">
                         <h2>Product 6</h2>
                         <img src="https://picsum.photos/900" alt="Product" style={imgStyles} />
                         <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</div>
                         <button onClick={this.clickHandler.bind(this)} style={btnStyle}>Details</button>
                     </div>
-                    <div style={styles} className="col-md-4">
+                    <div style={styles} className="col-md-4 product">
                         <h2>Product 7</h2>
                         <img src="https://picsum.photos/1000" alt="Product" style={imgStyles} />
                         <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</div>
                         <button onClick={this.clickHandler.bind(this)} style={btnStyle}>Details</button>
                     </div>
-                    <div style={styles} className="col-md-4">
+                    <div style={styles} className="col-md-4 product">
                         <h2>Product 7</h2>
                         <img src="https://picsum.photos/1000" alt="Product" style={imgStyles} />
                         <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</div>
                         <button onClick={this.clickHandler.bind(this)} style={btnStyle}>Details</button>
                     </div>
-                    <div style={styles} className="col-md-4">
+                    <div style={styles} className="col-md-4 product">
                         <h2>Product 7</h2>
                         <img src="https://picsum.photos/1000" alt="Product" style={imgStyles} />
                         <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</div>
